@@ -32,13 +32,3 @@ CREATE TABLE IF NOT EXISTS expenses (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
 );
-
-INSERT INTO incomes (amountIn, dateIn, descriptionIn) VALUES 
-(3000.00, '2024-01-15', 'Salary'),
-(500.00, '2024-01-20', 'Freelance Work');
-
-INSERT INTO expenses (amountEx, dateEx, descriptionEx) VALUES 
-(800.00, '2024-01-05', 'Rent'),
-(200.00, '2024-01-10', 'Groceries'),
-(50.00, '2024-01-12', 'Utilities');
-
