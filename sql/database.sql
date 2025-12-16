@@ -18,8 +18,10 @@ CREATE TABLE IF NOT EXISTS incomes (
     dateIn DATE NOT NULL,
     descriptionIn VARCHAR(250) DEFAULT 'Unknown',
     idUser INT NOT NULL,
+    idCard INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
+    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
 );
 
 -- Create expenses table
@@ -29,6 +31,21 @@ CREATE TABLE IF NOT EXISTS expenses (
     dateEx DATE NOT NULL,
     descriptionEx VARCHAR(250) DEFAULT 'Unknown',
     idUser INT NOT NULL,
+    idCard INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
+);
+
+--Create cards table
+CREATE TABLE IF NOT EXISTS cards(
+    idCard INT PRIMARY KEY AUTO_INCREMENT,
+    idUser INT NOT NULL,
+    cardName VARCHAR(50) NOT NULL,
+    bankName VARCHAR(50) NOT NULL,
+    cardNumber VARCHAR(20),
+    isMain BOOLEAN DEFAULT FALSE,
+    currentBalance DECIMAL(10,2) DEFAULT 0.00,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
 );
