@@ -38,6 +38,7 @@ $month_expense = $month_expense_result->fetch_assoc()['total'] ?? 0;
                     <a href="dashboard.php" class="text-white font-bold">Dashboard</a>
                     <a href="incomes/list.php" class="text-white hover:text-blue-200">Incomes</a>
                     <a href="expenses/list.php" class="text-white hover:text-blue-200">Expenses</a>
+                    <a href="cards/list.php" class="text-white hover:text-blue-200">Cards</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>
             </div>

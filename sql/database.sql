@@ -2,6 +2,10 @@
 CREATE DATABASE IF NOT EXISTS smart_wallet_Av;
 USE smart_wallet_Av;
 
+DROP TABLE users;
+DROP TABLE incomes;
+DROP TABLE expenses;
+
 -- Create users table
 CREATE TABLE IF NOT EXISTS users(
     idUser INT PRIMARY KEY AUTO_INCREMENT,
@@ -37,7 +41,7 @@ CREATE TABLE IF NOT EXISTS expenses (
     FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
 );
 
---Create cards table
+-- Create cards table
 CREATE TABLE IF NOT EXISTS cards(
     idCard INT PRIMARY KEY AUTO_INCREMENT,
     idUser INT NOT NULL,
