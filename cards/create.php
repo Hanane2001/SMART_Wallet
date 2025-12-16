@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../config/database.php';
 $userId = checkAuth();
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
