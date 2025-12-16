@@ -1,6 +1,6 @@
 <?php
 include '../config/database.php';
-
+$userId = checkAuth();
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $cardName = trim($_POST['cardName'] ?? '');
     $bankName = trim($_POST['bankName'] ?? '');

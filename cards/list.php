@@ -1,6 +1,9 @@
 <?php
 session_start();
 include '../config/database.php';
+checkAuth();
+$userId = $_SESSION['user_id'];
+$cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY isMain DESC, created_at DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +74,42 @@ include '../config/database.php';
                 </div>
             </form>
         </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php if ($cards_res->num_rows > 0): ?>
+                <?php while($card = $cards_res->fetch_assoc()): ?>
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl shadow-lg text-white p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold"><?php echo htmlspecialchars($card['cardName']); ?></h3>
+                            <p class="text-blue-100"><?php echo htmlspecialchars($card['bankName']); ?></p>
+                            <?php if($card['isMain']): ?>
+                                <span class="inline-block bg-yellow-500 text-white text-xs px-2 py-1 rounded-full mt-2">Main Card</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <p class="text-blue-100 text-sm">Current Balance</p>
+                        <p class="text-3xl font-bold">$<?php echo number_format($card['currentBalance'], 2); ?></p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="edit.php?id=<?php echo $card['idCard']; ?>" class="flex-1 bg-white text-blue-600 text-center py-2 rounded-lg hover:bg-blue-50 transition">Edit</a>
+                        <?php if(!$card['isMain']): ?>
+                        <a href="delete.php?id=<?php echo $card['idCard']; ?>" onclick="return confirm('Delete this card?')" class="flex-1 bg-red-500 text-white text-center py-2 rounded-lg hover:bg-red-600 transition">Delete</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <div class="col-span-3 bg-white rounded-xl shadow p-8 text-center">
+                    <i class="fas fa-credit-card text-gray-400 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">No Cards Yet</h3>
+                    <p class="text-gray-600 mb-4">Add your first card to start tracking your finances.</p>
+                    <button onclick="showAddForm()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">Add Your First Card</button>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
+
     <script>
         function showAddForm() {
             document.getElementById('addForm').classList.remove('hidden');
