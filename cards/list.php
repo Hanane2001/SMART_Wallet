@@ -23,7 +23,7 @@ $cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY i
                     <span class="text-white text-xl font-bold">SmartBudget</span>
                 </div>
                 <div id="navLinks" class="hidden md:flex space-x-6">
-                    <a href="../index.php" class="text-white hover:text-blue-200">Home</a>
+                    <!-- <a href="../index.php" class="text-white hover:text-blue-200">Home</a> -->
                     <a href="../dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
                     <a href="../incomes/list.php" class="text-white hover:text-blue-200">Incomes</a>
                     <a href="../expenses/list.php" class="text-white hover:text-blue-200">Expenses</a>

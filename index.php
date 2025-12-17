@@ -1,4 +1,7 @@
-<?php include 'config/database.php'; ?>
+<?php 
+session_start();
+include 'config/database.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +21,8 @@
                 </div>
                 <div id="navLinks" class="hidden md:flex space-x-6">
                     <a href="index.php" class="text-white hover:text-blue-200">Home</a>
-                    <a href="dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
-                    <a href="incomes/list.php" class="text-white hover:text-blue-200">Incomes</a>
-                    <a href="expenses/list.php" class="text-white hover:text-blue-200">Expenses</a>
-                    <a href="cards/list.php" class="text-white hover:text-blue-200">Cards</a>
+                    <a href="auth/login.php" class="text-white hover:text-blue-200">Login</a>
+                    <a href="auth/register.php" class="text-white hover:text-blue-200">Register</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>
             </div>
@@ -36,8 +37,8 @@
                 Simple, intuitive, and completely free.
             </p>
             <div class="flex justify-center space-x-4">
-                <a href="dashboard.php" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">View Dashboard</a>
-                <a href="incomes/list.php" class="bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">Add Income</a>
+                <a href="auth/login.php" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Login</a>
+                <a href="auth/register.php" class="bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">Get Started</a>
             </div>
         </div>
     </section>

@@ -21,7 +21,7 @@ $result = $conn->query("SELECT * FROM incomes ORDER BY dateIn DESC");
                     <span class="text-white text-xl font-bold">SmartBudget</span>
                 </div>
                 <div id="navLinks" class="hidden md:flex space-x-6">
-                    <a href="../index.php" class="text-white hover:text-blue-200">Home</a>
+                    <!-- <a href="../index.php" class="text-white hover:text-blue-200">Home</a> -->
                     <a href="../dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
                     <a href="list.php" class="text-white font-bold">Incomes</a>
                     <a href="../expenses/list.php" class="text-white hover:text-blue-200">Expenses</a>
