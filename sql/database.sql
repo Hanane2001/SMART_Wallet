@@ -47,11 +47,23 @@ CREATE TABLE IF NOT EXISTS expenses (
     amountEx DECIMAL(10,2) NOT NULL,
     dateEx DATE NOT NULL,
     descriptionEx VARCHAR(250) DEFAULT 'Unknown',
+    category VARCHAR(50) DEFAULT 'Other',
     idUser INT NOT NULL,
     idCard INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE,
     FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
+);
+
+-- Create monthly_limits table
+CREATE TABLE IF NOT EXISTS monthly_limits (
+    idLimit INT PRIMARY KEY AUTO_INCREMENT,
+    idUser INT NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    monthlyLimit DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_user_category (idUser, category),
+    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
 );
 
 -- Create transfe table
