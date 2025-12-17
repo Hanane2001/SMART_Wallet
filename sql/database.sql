@@ -71,3 +71,6 @@ CREATE TABLE IF NOT EXISTS transfers (
     FOREIGN KEY (sender_card_id) REFERENCES cards(idCard) ON DELETE CASCADE,
     FOREIGN KEY (receiver_card_id) REFERENCES cards(idCard) ON DELETE CASCADE
 );
+
+ALTER TABLE transfers 
+MODIFY receiver_id INT NULL;

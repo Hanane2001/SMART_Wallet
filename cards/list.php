@@ -28,6 +28,8 @@ $cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY i
                     <a href="../incomes/list.php" class="text-white hover:text-blue-200">Incomes</a>
                     <a href="../expenses/list.php" class="text-white hover:text-blue-200">Expenses</a>
                     <a href="list.php" class="text-white font-bold">Cards</a>
+                    <a href="../transfers/list.php" class="text-white hover:text-blue-200">Transfers</a>
+                    <a href="../auth/logout.php" class="text-white hover:text-blue-200">Logout</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>
             </div>
