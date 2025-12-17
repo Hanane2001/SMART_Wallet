@@ -70,4 +70,4 @@ $income = $result->fetch_assoc();
     </div>
 </body>
 </html>
-<?php $conn->close(); ?>
+<?php closeConnection($conn); ?>
