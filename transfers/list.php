@@ -3,20 +3,30 @@ session_start();
 include '../config/database.php';
 checkAuth();
 $userId = $_SESSION['user_id'];
-$sent = $conn->query("SELECT t.*, c.cardName as sender_card 
-FROM transfers t 
-JOIN users u ON t.receiver_id = u.idUser 
-JOIN cards c ON t.receiver_card_id = c.idCard 
-WHERE t.receiver_id = $userId 
+$sent_stmt = $conn->prepare("SELECT t.*, u.email AS receiver_email, c.cardName AS sender_card
+FROM transfers t
+JOIN users u ON t.receiver_id = u.idUser
+JOIN cards c ON t.sender_card_id = c.idCard
+WHERE t.sender_id = ?
 ORDER BY t.created_at DESC");
-$received = $conn->query("SELECT t.*, c.cardName as receiver_card 
+$sent_stmt->bind_param("i", $userId);
+$sent_stmt->execute();
+$sent = $sent_stmt->get_result();
+$received_stmt = $conn->prepare("SELECT t.*, u.email AS sender_email, c.cardName AS receiver_card
 FROM transfers t
 JOIN users u ON t.sender_id = u.idUser
 JOIN cards c ON t.receiver_card_id = c.idCard
-WHERE t.receiver_id = $userId
+WHERE t.receiver_id = ?
 ORDER BY t.created_at DESC");
-$cards_result = $conn->query("SELECT * FROM cards WHERE idUser = $userId");
+$received_stmt->bind_param("i", $userId);
+$received_stmt->execute();
+$received = $received_stmt->get_result();
+$cards_stmt = $conn->prepare("SELECT * FROM cards WHERE idUser = ?");
+$cards_stmt->bind_param("i", $userId);
+$cards_stmt->execute();
+$cards_result = $cards_stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
