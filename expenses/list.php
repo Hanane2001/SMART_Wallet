@@ -29,12 +29,12 @@ ORDER BY e.dateEx DESC");
                     <span class="text-white text-xl font-bold">SmartBudget</span>
                 </div>
                 <div id="navLinks" class="hidden md:flex space-x-6">
-                    <!-- <a href="../index.php" class="text-white hover:text-blue-200">Home</a> -->
                     <a href="../dashboard.php" class="text-white hover:text-blue-200">Dashboard</a>
                     <a href="../incomes/list.php" class="text-white hover:text-blue-200">Incomes</a>
                     <a href="list.php" class="text-white font-bold">Expenses</a>
                     <a href="../cards/list.php" class="text-white hover:text-blue-200">Cards</a>
                     <a href="../transfers/list.php" class="text-white hover:text-blue-200">Transfers</a>
+                    <a href="../limits/list.php" class="text-white hover:text-blue-200">Limits</a>
                     <a href="../auth/logout.php" class="text-white hover:text-blue-200">Logout</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>
@@ -107,6 +107,7 @@ ORDER BY e.dateEx DESC");
                             <th class="px-6 py-3 text-left">Card</th>
                             <th class="px-6 py-3 text-left">Category</th>
                             <th class="px-6 py-3 text-left">Description</th>
+                            <th class="px-6 py-3 text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
