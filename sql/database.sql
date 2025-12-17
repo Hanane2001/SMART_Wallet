@@ -15,6 +15,19 @@ CREATE TABLE IF NOT EXISTS users(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create cards table
+CREATE TABLE IF NOT EXISTS cards(
+    idCard INT PRIMARY KEY AUTO_INCREMENT,
+    idUser INT NOT NULL,
+    cardName VARCHAR(50) NOT NULL,
+    bankName VARCHAR(50) NOT NULL,
+    cardNumber VARCHAR(20),
+    isMain BOOLEAN DEFAULT FALSE,
+    currentBalance DECIMAL(10,2) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
+);
+
 -- Create incomes table
 CREATE TABLE IF NOT EXISTS incomes (
     idIn INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,15 +54,20 @@ CREATE TABLE IF NOT EXISTS expenses (
     FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
 );
 
--- Create cards table
-CREATE TABLE IF NOT EXISTS cards(
-    idCard INT PRIMARY KEY AUTO_INCREMENT,
-    idUser INT NOT NULL,
-    cardName VARCHAR(50) NOT NULL,
-    bankName VARCHAR(50) NOT NULL,
-    cardNumber VARCHAR(20),
-    isMain BOOLEAN DEFAULT FALSE,
-    currentBalance DECIMAL(10,2) DEFAULT 0.00,
+-- Create transfe table
+CREATE TABLE IF NOT EXISTS transfers (
+    idTrans INT PRIMARY KEY AUTO_INCREMENT,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    receiver_email VARCHAR(150),
+    amount DECIMAL(10,2) NOT NULL,
+    sender_card_id INT NOT NULL,
+    receiver_card_id INT NOT NULL,
+    descriptionTrans VARCHAR(250),
+    status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE
+    FOREIGN KEY (sender_id) REFERENCES users(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (sender_card_id) REFERENCES cards(idCard) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_card_id) REFERENCES cards(idCard) ON DELETE CASCADE
 );
