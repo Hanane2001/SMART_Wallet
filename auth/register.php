@@ -3,6 +3,7 @@ include '../config/database.php';
 session_start();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
     $fullName = trim($_POST['fullName'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -31,6 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }
     $res->close();
     if(empty($errors)){
+
         $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
 
         $std = $conn->prepare("INSERT INTO users (fullName,email,password) VALUES(?,?,?)");
@@ -41,7 +43,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $_SESSION['user_email'] = $email;
             $_SESSION['user_name'] = $fullName;
             
-            header("Location: ../dashboard.php");
+            // edited by dada
+                $_SESSION['pending_user_id'] = $userId;
+                $_SESSION['pending_email']   = $email;
+                $_SESSION['pending_name']    = $fullName;
+
+            header("Location: ./verify_otp.php");
             exit();
         }else{
             $errors[] = "Registration failed. Please try again.";

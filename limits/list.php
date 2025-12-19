@@ -40,7 +40,6 @@ $limits_result = $conn->query("SELECT * FROM monthly_limits WHERE idUser = $user
         <div class="flex justify-between items-center mb-8">
             <div>
                 <h1 class="text-3xl font-bold text-gray-800">Monthly Spending Limits</h1>
-                <p class="text-gray-600">Set limits to control your spending by category</p>
             </div>
             <button onclick="showAddForm()" class="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">Add Limit</button>
         </div>

@@ -19,15 +19,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $std = $conn->prepare("SELECT idUser, fullName, email, password FROM users WHERE email = ?");
         $std->bind_param("s", $email);
         $std->execute();
-        $res = $std->get_result();
-        if($res->num_rows === 1){
-            $user = $res->fetch_assoc();
+        $result = $std->get_result();
+        
+        if($result->num_rows === 1){
+            $user = $result->fetch_assoc();
+            
             if(password_verify($password, $user['password'])){
-                $_SESSION['user_id'] = $user['idUser'];
-                $_SESSION['user_email'] = $user['email'];
-                $_SESSION['user_name'] = $user['fullName'];
-                
-                header("Location: ../dashboard.php");
+                $_SESSION['pending_user_id'] = $user['idUser'];
+                $_SESSION['pending_email']   = $user['email'];
+                $_SESSION['pending_name']    = $user['fullName'];
+                header("Location: email_send.php");
                 exit();
             } else {
                 $errors[] = "Invalid email or password";

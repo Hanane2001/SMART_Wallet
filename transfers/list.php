@@ -62,7 +62,6 @@ $cards_result = $cards_stmt->get_result();
         <div class="flex justify-between items-center mb-8">
             <div>
                 <h1 class="text-3xl font-bold text-gray-800">Money Transfers</h1>
-                <p class="text-gray-600">Send and receive money from other users</p>
             </div>
             <button onclick="showSendForm()" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition">Send Money</button>
         </div>
