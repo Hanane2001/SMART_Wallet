@@ -1,19 +1,19 @@
 <?php 
 include 'config/database.php';
-
-$total_income_result = $conn->query("SELECT SUM(amountIn) as total FROM incomes");
+$userId = checkAuth();
+$total_income_result = $conn->query("SELECT SUM(amountIn) as total FROM incomes WHERE idUser = $userId");
 $total_income = $total_income_result->fetch_assoc()['total'] ?? 0;
 
-$total_expense_result = $conn->query("SELECT SUM(amountEx) as total FROM expenses");
+$total_expense_result = $conn->query("SELECT SUM(amountEx) as total FROM expenses WHERE idUser = $userId");
 $total_expense = $total_expense_result->fetch_assoc()['total'] ?? 0;
 
 $balance = $total_income - $total_expense;
 
 $month_InEx = date('Y-m');
-$month_income_result = $conn->query("SELECT SUM(amountIn) as total FROM incomes WHERE DATE_FORMAT(dateIn, '%Y-%m') = '$month_InEx'");
+$month_income_result = $conn->query("SELECT SUM(amountIn) as total FROM incomes WHERE idUser = $userId AND DATE_FORMAT(dateIn, '%Y-%m') = '$month_InEx'");
 $month_income = $month_income_result->fetch_assoc()['total'] ?? 0;
 
-$month_expense_result = $conn->query("SELECT SUM(amountEx) as total FROM expenses WHERE DATE_FORMAT(dateEx, '%Y-%m') = '$month_InEx'");
+$month_expense_result = $conn->query("SELECT SUM(amountEx) as total FROM expenses WHERE idUser = $userId AND DATE_FORMAT(dateEx, '%Y-%m') = '$month_InEx'");
 $month_expense = $month_expense_result->fetch_assoc()['total'] ?? 0;
 ?>
 <!DOCTYPE html>
