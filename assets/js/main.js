@@ -50,7 +50,18 @@ function getMessageText(message) {
         'income_deleted': 'Income deleted successfully!',
         'expense_added': 'Expense added successfully!',
         'expense_updated': 'Expense updated successfully!',
-        'expense_deleted': 'Expense deleted successfully!'
+        'expense_deleted': 'Expense deleted successfully!',
+        // Messages pour les cartes
+        'card_added': 'Card added successfully!',
+        'card_updated': 'Card updated successfully!',
+        'card_deleted': 'Card deleted successfully!',
+        'balance_updated': 'Card balance updated successfully!',
+        // Messages pour les limites
+        'limit_added': 'Monthly limit added successfully!',
+        'limit_updated': 'Monthly limit updated successfully!',
+        'limit_deleted': 'Monthly limit deleted successfully!',
+        // Messages pour les transferts
+        'transfer_sent': 'Money sent successfully!'
     };
     return messages[message] || 'Operation completed successfully!';
 }
@@ -67,7 +78,15 @@ function getErrorText(error) {
         'insufficient_funds': 'Insufficient funds on selected card!',
         'invalid_card': 'Invalid card selected!',
         'user_not_found': 'Recipient not found!',
-        'transfer_failed': 'Transfer failed. Please try again.'
+        'transfer_failed': 'Transfer failed. Please try again.',
+        // Erreurs pour les cartes
+        'invalid_data': 'Invalid data provided!',
+        'cannot_delete_main': 'Cannot delete main card!',
+        // Erreurs pour les limites
+        'limit_exists': 'Limit already exists for this category!',
+        'invalid_limit': 'Invalid limit amount!',
+        // Erreurs pour les transferts
+        'receiver_no_main_card': 'Recipient does not have a main card set!'
     };
     return errors[error] || 'An error occurred!';
 }
