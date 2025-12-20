@@ -62,7 +62,12 @@ function getErrorText(error) {
         'not_found': 'Record not found!',
         'insert_failed': 'Failed to add record!',
         'update_failed': 'Failed to update record!',
-        'delete_failed': 'Failed to delete record!'
+        'delete_failed': 'Failed to delete record!',
+        'limit_exceeded': 'Monthly limit exceeded for this category!',
+        'insufficient_funds': 'Insufficient funds on selected card!',
+        'invalid_card': 'Invalid card selected!',
+        'user_not_found': 'Recipient not found!',
+        'transfer_failed': 'Transfer failed. Please try again.'
     };
     return errors[error] || 'An error occurred!';
 }

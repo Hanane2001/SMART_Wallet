@@ -1,8 +1,7 @@
 <?php 
 session_start();
 include '../config/database.php';
-checkAuth();
-$userId = $_SESSION['user_id'];
+$userId = checkAuth();
 $cards_result = $conn->query("SELECT * FROM cards WHERE idUser = $userId");
 $categories = ['Food', 'Transportation', 'Housing', 'Entertainment', 'Shopping', 'Healthcare', 'Education', 'Utilities', 'Other'];
 $result = $conn->query("SELECT e.*, c.cardName 

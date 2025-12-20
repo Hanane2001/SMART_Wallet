@@ -1,8 +1,7 @@
 <?php
 session_start();
 include '../config/database.php';
-checkAuth();
-$userId = $_SESSION['user_id'];
+$userId = checkAuth();
 $limits_result = $conn->query("SELECT * FROM monthly_limits WHERE idUser = $userId ORDER BY category");
 ?>
 <!DOCTYPE html>

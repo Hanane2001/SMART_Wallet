@@ -1,8 +1,7 @@
 <?php
 session_start();
 include '../config/database.php';
-checkAuth();
-$userId = $_SESSION['user_id'];
+$userId = checkAuth();
 $sent_stmt = $conn->prepare("SELECT t.*, u.email AS receiver_email, c.cardName AS sender_card
 FROM transfers t
 JOIN users u ON t.receiver_id = u.idUser

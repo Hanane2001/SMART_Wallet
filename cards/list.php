@@ -1,8 +1,7 @@
 <?php
 session_start();
 include '../config/database.php';
-checkAuth();
-$userId = $_SESSION['user_id'];
+$userId = checkAuth();
 $cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY isMain DESC, created_at DESC");
 ?>
 <!DOCTYPE html>
