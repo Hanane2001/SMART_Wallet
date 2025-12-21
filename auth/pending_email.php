@@ -10,6 +10,9 @@ require '../vendor/autoload.php';
 $dotenv = DotenvVault\DotenvVault::createImmutable(dirname(__DIR__));
 $dotenv->safeLoad();
 function sendOTP($email) {
+    if(isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time']) < 60) {
+        return true;
+    }
 
     $otp = random_int(100000, 999999);
     $_SESSION['otp'] = (string)$otp;
@@ -30,8 +33,12 @@ function sendOTP($email) {
         $mail->addAddress($email);
 
         $mail->isHTML(true);
-        $mail->Subject = 'Your OTP Code';
-        $mail->Body    = "<h2>Your OTP is: <strong>$otp</strong></h2>";
+        $mail->Subject = 'Your OTP Code - SmartBudget';
+        $mail->Body    = "<h2>Your OTP Code</h2>
+            <p>Your One-Time Password for SmartBudget is:</p>
+            <h1 style='font-size: 32px; color: #3b82f6;'><strong>$otp</strong></h1>
+            <p>This code will expire in 5 minutes.</p>
+            <p>If you didn't request this code, please ignore this email.</p>";
 
         $mail->send();
         return true;

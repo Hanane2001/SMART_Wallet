@@ -12,6 +12,12 @@ if (!isset($_SESSION['otp'])) {
     exit;
 }
 
+if (isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time']) > 300) {
+    unset($_SESSION['otp'], $_SESSION['otp_time']);
+    header("Location: email_send.php?expired=1");
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userOtp = $_POST['otp'] ?? '';
     
@@ -19,7 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Please enter OTP";
     } elseif ($userOtp !== $_SESSION['otp']) {
         $error = "Invalid OTP code";
-    } else {
+    } elseif ((time() - $_SESSION['otp_time']) > 300) {
+        $error = "OTP has expired. Please request a new one.";
+    }else {
         unset($_SESSION['otp'], $_SESSION['otp_time']);
 
         $_SESSION['user_id']    = $_SESSION['pending_user_id'];
@@ -59,10 +67,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="mt-2 text-center text-sm text-gray-600">
                     Enter the code sent to <?php echo htmlspecialchars($_SESSION['pending_email'] ?? ''); ?>
                 </p>
+                <p class="text-center text-xs text-gray-500 mt-1">Valid for 5 minutes</p>
                 
                 <?php if(isset($error)): ?>
                 <div class="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                     <?php echo htmlspecialchars($error); ?>
+                </div>
+                <?php endif; ?>
+                
+                <?php if(isset($_GET['expired'])): ?>
+                <div class="mt-4 bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+                    OTP has expired. A new one has been sent.
                 </div>
                 <?php endif; ?>
             </div>
@@ -71,7 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div>
                     <label for="otp" class="block text-gray-700 mb-2">OTP Code (6 digits)</label>
                     <input id="otp" name="otp" type="text" maxlength="6" pattern="\d{6}" required 
-                           class="appearance-none rounded-lg relative block w-full px-3 py-3 text-center text-2xl font-bold border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                           class="appearance-none rounded-lg relative block w-full px-3 py-3 text-center text-2xl font-bold border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="000000">
                 </div>
 
                 <div>

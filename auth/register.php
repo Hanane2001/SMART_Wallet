@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $_SESSION['pending_email']   = $email;
                 $_SESSION['pending_name']    = $fullName;
 
-            header("Location: ./verify_otp.php");
+            header("Location: verify_otp.php");
             exit();
         }else{
             $errors[] = "Registration failed. Please try again.";

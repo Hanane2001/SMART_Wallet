@@ -11,8 +11,14 @@ if (!isset($_SESSION['pending_email'])) {
 
 $emailL = $_SESSION['pending_email'];
 
-if(!sendOTP($emailL)){
-    die("Failed to send OTP");
+if(isset($_GET['resend'])) {
+    unset($_SESSION['otp'], $_SESSION['otp_time']);
+}
+
+if(!isset($_SESSION['otp']) || (isset($_SESSION['otp_time']) && (time() - $_SESSION['otp_time']) > 300)) {
+    if(!sendOTP($emailL)){
+        die("Failed to send OTP");
+    }
 }
 
 header("Location: verify_otp.php");

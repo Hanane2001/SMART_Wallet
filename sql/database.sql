@@ -2,9 +2,13 @@
 CREATE DATABASE IF NOT EXISTS smart_wallet_Av;
 USE smart_wallet_Av;
 
-DROP TABLE users;
-DROP TABLE incomes;
-DROP TABLE expenses;
+DROP TABLE IF EXISTS transfers;
+DROP TABLE IF EXISTS monthly_limits;
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS incomes;
+DROP TABLE IF EXISTS cards;
+DROP TABLE IF EXISTS recurring_transactions;
+DROP TABLE IF EXISTS users;
 
 -- Create users table
 CREATE TABLE IF NOT EXISTS users(
@@ -70,7 +74,7 @@ CREATE TABLE IF NOT EXISTS monthly_limits (
 CREATE TABLE IF NOT EXISTS transfers (
     idTrans INT PRIMARY KEY AUTO_INCREMENT,
     sender_id INT NOT NULL,
-    receiver_id INT NOT NULL,
+    receiver_id INT NULL,
     receiver_email VARCHAR(150),
     amount DECIMAL(10,2) NOT NULL,
     sender_card_id INT NOT NULL,
@@ -84,5 +88,19 @@ CREATE TABLE IF NOT EXISTS transfers (
     FOREIGN KEY (receiver_card_id) REFERENCES cards(idCard) ON DELETE CASCADE
 );
 
-ALTER TABLE transfers 
-MODIFY receiver_id INT NULL;
+-- Create recurring_transactions table 
+CREATE TABLE IF NOT EXISTS recurring_transactions (
+    idRecurring INT PRIMARY KEY AUTO_INCREMENT,
+    idUser INT NOT NULL,
+    idCard INT NOT NULL,
+    transaction_type ENUM('income', 'expense') NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    description VARCHAR(250) NOT NULL,
+    category VARCHAR(50) DEFAULT 'Other',
+    day_of_month INT NOT NULL CHECK (day_of_month BETWEEN 1 AND 31),
+    is_active BOOLEAN DEFAULT TRUE,
+    last_processed DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idUser) REFERENCES users(idUser) ON DELETE CASCADE,
+    FOREIGN KEY (idCard) REFERENCES cards(idCard) ON DELETE CASCADE
+);
