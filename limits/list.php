@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/database.php';
 $userId = checkAuth();
 $limits_result = $conn->query("SELECT * FROM monthly_limits WHERE idUser = $userId ORDER BY category");
@@ -28,6 +27,7 @@ $limits_result = $conn->query("SELECT * FROM monthly_limits WHERE idUser = $user
                     <a href="../cards/list.php" class="text-white hover:text-blue-200">Cards</a>
                     <a href="../transfers/list.php" class="text-white hover:text-blue-200">Transfers</a>
                     <a href="list.php" class="text-white font-bold">Limits</a>
+                    <a href="../transaction/list.php" class="text-white hover:text-blue-200">Transaction</a>
                     <a href="../auth/logout.php" class="text-white hover:text-blue-200">Logout</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>

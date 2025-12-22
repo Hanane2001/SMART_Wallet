@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include 'config/database.php'; 
 ?>
 <!DOCTYPE html>
@@ -37,7 +36,7 @@ include 'config/database.php';
                 Simple, intuitive, and completely free.
             </p>
             <div class="flex justify-center space-x-4">
-                <a href="auth/login.php" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Login</a>
+                <a href="/auth/login.php" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Login</a>
                 <a href="auth/register.php" class="bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">Get Started</a>
             </div>
         </div>

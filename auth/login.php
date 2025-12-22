@@ -1,7 +1,5 @@
 <?php
 include '../config/database.php';
-session_start();
-
 if (isset($_SESSION['user_id'])) {
     header("Location: ../dashboard.php");
     exit();
@@ -107,5 +105,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         </div>
     </div>
 </body>
+
 </html>
-<?php closeConnection($conn); ?>
+
+
+<?php 
+ closeConnection($conn); ?>

@@ -1,6 +1,5 @@
 <?php 
 include '../config/database.php';
-session_start();
 
 if (!isset($_SESSION['pending_email'])) {
     header("Location: login.php");

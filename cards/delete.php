@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/database.php';
 $userId = checkAuth();
 if(!isset($_GET['id']) || empty($_GET['id'])){

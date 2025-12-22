@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/database.php';
 $userId = checkAuth();
 $sent_stmt = $conn->prepare("SELECT t.*, u.email AS receiver_email, c.cardName AS sender_card
@@ -50,6 +49,7 @@ $cards_result = $cards_stmt->get_result();
                     <a href="../cards/list.php" class="text-white hover:text-blue-200">Cards</a>
                     <a href="list.php" class="text-white font-bold">Transfers</a>
                     <a href="../limits/list.php" class="text-white hover:text-blue-200">Limits</a>
+                    <a href="../transaction/list.php" class="text-white hover:text-blue-200">Transaction</a>
                     <a href="../auth/logout.php" class="text-white hover:text-blue-200">Logout</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>

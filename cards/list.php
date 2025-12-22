@@ -1,5 +1,4 @@
 <?php
-session_start();
 include '../config/database.php';
 $userId = checkAuth();
 $cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY isMain DESC, created_at DESC");
@@ -28,6 +27,7 @@ $cards_res = $conn->query("SELECT * FROM cards WHERE idUser = $userId ORDER BY i
                     <a href="list.php" class="text-white font-bold">Cards</a>
                     <a href="../transfers/list.php" class="text-white hover:text-blue-200">Transfers</a>
                     <a href="../limits/list.php" class="text-white hover:text-blue-200">Limits</a>
+                    <a href="../transaction/list.php" class="text-white hover:text-blue-200">Transaction</a>
                     <a href="../auth/logout.php" class="text-white hover:text-blue-200">Logout</a>
                 </div>
                 <button id="menu_tougle" class="md:hidden text-white"><i class="fas fa-bars text-2xl"></i></button>
